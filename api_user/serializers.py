@@ -1,7 +1,6 @@
-fron django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-
 from core.models import Profile, FriendRequest
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,16 +16,16 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class ProfileSerializer(serializers.ModelSerializer):
-    
+
     created_on = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+
     class Meta:
-        model = Profile
+        model=Profile
         fields = ('id', 'nickName', 'userPro', 'created_on', 'img')
         extra_kwargs = {'userPro': {'read_only': True}}
 
-class FrinedRequestSerializer(serializers.ModelSerializer):
-    
+class FriendRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = FriendRequest
-        fields = ('id', 'askFrom', 'askTo', 'approved')
+        fields = ('id','askFrom','askTo','approved')
         extra_kwargs = {'askFrom': {'read_only': True}}
